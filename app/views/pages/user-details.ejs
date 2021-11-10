@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="box-form">
+    <div>
+        <h2 class="page-title"><%= userDetails[0]["first_name"] %>' schedule</h2>
+    </div>
+    <table>
+        <thead>
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Start at</th>
+            <th scope="col">End at</th>
+            <th scope="col">Work time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% userDetails.forEach(function(event) { %>
+          <tr>
+            <td><%- event.day %></td>
+            <td><%- event.start_at %></td>
+            <td><%- event.end_at %></td>
+            <td><%- event.hour %>h <%- event.minute %>min</td>
+            <td>
+              <form action="/delete/schedule/<%= event.id %>" method="post">
+                <input type="submit" class="btn" id="btn-delete" value="Delete"></input>
+          </form>
+          <!-- <form action="/edit/schedule/<%= event.user_id %>" method="post">
+            <input type="submit" class="btn btn-danger btn-sm" value="Edit"></input></a>
+      </form> -->
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <a href="http://localhost:3000" class="back-to-main">Back to main page</a>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>
+</html>

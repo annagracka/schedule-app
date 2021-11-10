@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="box-form">
+    <h2 class="page-title">Users</h2>
+    <table class="table-responsive table">
+      <thead>
+        <tr>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(function(user) { %>
+        <tr>
+          <td><a href="http://localhost:3000/users/<%- user.id %>"><b><%- user.first_name %></b></a></td>
+          <td><%- user.last_name %></td>
+          <td>
+            <form action="/delete/user/<%=user.id%>" method="post">
+              <input type="submit" class="btn" id="btn-delete" value="Delete"></input></a>
+        </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <div class="submit-btns">
+      <a href="http://localhost:3000/new/user"><button type="button" class="btn btn-submit">Add user</button></a>
+      <a href="http://localhost:3000/new/schedule"><button type="button" class="btn btn-submit">Add date</button></a>
+    </div>
+    <a href="http://localhost:3000" class="back-to-main">Back to main page</a>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>
+</html>

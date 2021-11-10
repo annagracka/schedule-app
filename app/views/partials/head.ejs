@@ -1,0 +1,195 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="Description" content="Mr.Coffee, un café (presque) comme les autres.
+Ici, on vient pour retrouver quelqu’un, ou se retrouver avec soi, pour travailler sur son ordinateur ou se détendre, pour lire parmis les ouvrages de notre bibliothèque ou simplement apprécier un bon café. Tout ce monde si différent qui se croise sans se voir, ça nous a donné envie de faire quelque chose en plus.">
+<title>Mr.Coffee Schedule</title>
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
+<style>
+*, 
+*::after, *::before {
+    box-sizing: inherit;
+    margin: 0;
+}
+
+body {
+  background-color: #F5F5F5;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+body, textarea, input {
+    font-family: archivo, sans-serif;
+}
+
+h1, h2, h3, p {
+    color: #5c5b5b;
+    letter-spacing: 1px;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 600;
+  /* text-align: right; */
+}
+
+a {
+color: #6A7B8B;
+text-decoration: none;
+display: inline;
+}
+
+a,
+input[type=submit],
+button:hover {
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
+
+nav {
+  font-size: 16px;
+  background-color: #6A7B8B;
+  width: 100%;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  }
+
+nav a {
+  color: #F5F5F5;
+}
+
+nav ul {
+  display: flex;
+  justify-content:flex-end;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 35px 1vw 35px 2vw;
+  text-align: center;
+}
+
+table {
+  border-spacing: 0;
+  margin: 20px;
+}
+
+th, td {
+  border-bottom: 1px solid #BBC2C9;
+  text-align: left;
+}
+
+.submit-btns {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+form {
+  margin: 30px auto;
+  width: 500px;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+}
+
+input {
+  background-color: #FFF;
+  border-radius: 5px;
+  border-style: solid;
+  border-color:#BBC2C9;
+  border-width: 1px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  width: 70%;
+}
+
+footer {
+  bottom: 0;
+  /* top:0; */
+  /* position: absolute; */
+}
+
+footer p {
+  color:#F5F5F5;
+  text-align: center;
+}
+
+.nav-logo {
+  height: 70px;
+  width: auto;
+  position: absolute;
+  padding-top: 10px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 11vh;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box-form {
+  flex: 3;
+  justify-content: center;
+  padding-top: 11vh;
+  max-width: 300px;
+  /* margin-right: 100px; */
+}
+
+.form-submit {
+  justify-self: center;
+}
+
+.login-img {
+  flex: 5;
+  width: 600px;
+}
+
+.btn {
+  background-color: #6A7B8B;
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: 0px 1px 4px #6a7b8b;
+  color: #F5F5F5;
+  font-size: 16px;
+}
+
+.btn-submit {
+  padding: 10px 20px;
+}
+
+.form-btn {
+  text-align: center;
+}
+
+#btn-delete {
+  background-color: #e13c21;
+  padding: 10px 10px;
+  margin: 0;
+}
+
+.page-title {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.back-to-main {
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+</style>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="box-form">
+    <div class="">
+      <h2 class="page-title">New user</h2>
+    </div>
+    <form action="" method="post">
+        <div class="label-box">
+            <label for="first_name">First name</label>
+            <div</div>
+        </div>
+        <input type="text" name="first_name" maxlength="30" required><br>
+        <div class="label-box">
+            <label for="last_name">Last name</label>
+            <div for="last_name"></div>
+        </div>
+        <input type="text" id="last_name" name="last_name" maxlength="30" required><br>
+        <div class="label-box">
+            <label for="email">Email</label>
+            <div for="email"></div>
+        </div>
+        <input id="email" name="email" required><br>
+        <div class="label-box">
+            <label for="password">Password</label>
+            <div for="password"></div>
+            <input type="text" id="password" name="password" required><br>
+        </div>
+        <div class="form-btn">
+            <input type="submit" id="new-event=btn" class="btn btn-submit" value="submit"></input>
+        </div>
+    </form>
+    <a href="http://localhost:3000" class="back-to-main">Back to main page</a>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>
+</html>
