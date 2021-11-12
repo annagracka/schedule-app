@@ -17,14 +17,15 @@ router
   });
 
 router
-  .route('/schedule/')
+  .route('/schedule/:id')
   .post((req, res) => {
     const { id } = req.params;
     db.query('DELETE FROM schedule WHERE id = $1', [id], (dbErr, dbRes) => {
-      if (dbErr) {
-        console.log(dbErr);
-      } else {
-        console.log(dbRes.rows);
+      try {
+        res.redirect('/users');
+      }
+      catch(e) {
+        console.log(e)
       }
     });
     res.redirect('/users');

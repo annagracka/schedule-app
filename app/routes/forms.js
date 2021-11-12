@@ -15,10 +15,13 @@ router
       password: req.body.password,
     };
 
+    console.log(newUser)
+
     if (verify.isFieldEmpty(newUser)) {
       return res.status(418).send('Invalid data');
     }
     if (verify.isEmailInDatabase(newUser)) {
+      console.log('email zajety')
       return res.render('error', { error: 'Invalid data' });
     }
 
@@ -37,7 +40,7 @@ router
           }
         } catch (e) {
           console.log(e);
-          res.render('error', { error: 'Invalid data' });
+          res.render('error', { error: 'Invalid data, dodac tego nie moglam' });
         }
       },
     );
@@ -53,11 +56,15 @@ router
       end_at: req.body.end_at,
     };
 
-    if(!verify.isEmailInDatabase(newDate)) {
-      return res.render('error', { error: 'Email not found'})
-    };
+    console.log(newDate['email'])
+    console.log(verify.isEmailInDatabase(newDate))
 
-    verify.isDateAvailable(newDate);
+    // if (verify.isEmailInDatabase(newDate)) {
+      // return res.render('error', { error: 'Email not found' });
+      // console.log('jest @')
+    // }
+
+    // verify.isDateAvailable(newDate);
 
     const addDate = `INSERT INTO schedule (user_id, day, start_at, end_at)
     VALUES ((SELECT id FROM users WHERE email='${newDate.email}'), '${newDate.day}', '${newDate.start_at}', '${newDate.end_at}');`;

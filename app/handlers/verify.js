@@ -14,11 +14,11 @@ function isEmailInDatabase(newUser) {
     [newUser.email],
     (dbErr, dbRes) => {
       const { count } = dbRes.rows[0];
-      if (count !== '0') {
+      if (count === '1') {
         return true;
       }
     },
-  ); return false;
+  );
 }
 
 function isDateAvailable(newDate) {
@@ -33,10 +33,8 @@ function isDateAvailable(newDate) {
 
         if (firstApprovedVer && secApprovedVer) {
           return;
-        } else {
-          return console.log('i hcuj')
-        };
-      };
+        }
+      } return res.render('error', { error: 'Invalid data' });
     }
   });
 }

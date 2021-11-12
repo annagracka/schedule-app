@@ -10,11 +10,11 @@
 </header>
 
 <main>
-  <div class="box-form">
+  <div class="container-table">
     <div>
-      <h2 class="page-title">Schedule</h2>
+      <h2>Schedule</h2>
     </div>
-    <table class="table-responsive table">
+    <table class="table-center">
       <thead>
         <tr>
           <th scope="col">First name</th>
@@ -34,8 +34,8 @@
           <td><%- event.end_at %></td>
           <td><%- event.hour %>h <%- event.minute %>min</td>
           <td>
-            <form action="/delete/schedule/<%= event.id %>" method="post">
-              <input type="submit" class="btn" id="btn-delete" value="Delete"></input></a>
+            <form action="/delete/schedule/<%= event.id %>" class="delete-button" method="post">
+              <input type="submit" class="btn" id="btn-delete" value="Delete"></input>
         </form>
         <!-- <form action="/edit/schedule/<%= event.user_id %>" method="post">
           <input type="submit" class="btn btn-danger btn-sm" value="Edit"></input></a>
@@ -44,10 +44,11 @@
         <% }); %>
       </tbody>
     </table>
-    <div class="submit-btns">
+    <section class="back-to-main">
       <a href="http://localhost:3000/new/user"><button type="button" class="btn btn-submit">Add user</button></a>
       <a href="http://localhost:3000/new/schedule"><button type="button" class="btn btn-submit">Add date</button></a>
-    </div>
+      <br>
+    </section>
   </div>
 </main>
 

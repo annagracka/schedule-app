@@ -29,10 +29,15 @@ h1, h2, h3, p {
     letter-spacing: 1px;
 }
 
+h2 {
+  margin-top: 30px;
+  text-align: center;
+}
+
 p {
   font-size: 14px;
   font-weight: 600;
-  /* text-align: right; */
+  text-align: right;
 }
 
 a {
@@ -76,11 +81,12 @@ nav ul li {
 
 table {
   border-spacing: 0;
-  margin: 20px;
+  /* width: 500px; */
 }
 
 th, td {
   border-bottom: 1px solid #BBC2C9;
+  width: 120px;
   text-align: left;
 }
 
@@ -92,7 +98,7 @@ th, td {
 
 form {
   margin: 30px auto;
-  width: 500px;
+  width: 300px;
 }
 
 select:focus,
@@ -110,7 +116,7 @@ input {
   margin-bottom: 10px;
   margin-top: 10px;
   padding: 10px;
-  width: 70%;
+  width: 100%;
 }
 
 footer {
@@ -134,18 +140,25 @@ footer p {
 .flex-container {
   display: flex;
   justify-content: space-around;
-  padding-top: 11vh;
-  width: 70%;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 11vh;
+  width: 70%;
+}
+
+.box-login {
+  flex: 3;
+  justify-content: center;
+  padding-top: 9vh;
+  max-width: 300px;
 }
 
 .box-form {
-  flex: 3;
-  justify-content: center;
-  padding-top: 11vh;
-  max-width: 300px;
-  /* margin-right: 100px; */
+  padding-top: 8vh;
+}
+
+.label-box {
+  width: 300px;
 }
 
 .form-submit {
@@ -155,6 +168,10 @@ footer p {
 .login-img {
   flex: 5;
   width: 600px;
+}
+
+.table-center {
+  margin: 30px auto;
 }
 
 .btn {
@@ -174,10 +191,17 @@ footer p {
   text-align: center;
 }
 
+.delete-button {
+  margin: 10px 5px 10px 5px;
+  width: min-content;
+}
+
 #btn-delete {
+  font-size: 14px;
   background-color: #e13c21;
   padding: 10px 10px;
   margin: 0;
+  width: 80px;
 }
 
 .page-title {
@@ -189,6 +213,13 @@ footer p {
   font-size: 14px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.back-to-main button {
+  margin: 10px 10px 50px 10px;
+}
+
+#back-link {
   text-decoration: underline;
 }
 
