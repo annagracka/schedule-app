@@ -29,6 +29,7 @@ router
       }
     });
     res.redirect('/users');
+    // redirect do user-details okreslonego uzytkownika
   });
 
 module.exports = router;

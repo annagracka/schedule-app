@@ -15,8 +15,6 @@ router
       password: req.body.password,
     };
 
-    console.log(newUser)
-
     if (verify.isFieldEmpty(newUser)) {
       return res.status(418).send('Invalid data');
     }
