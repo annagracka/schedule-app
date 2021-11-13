@@ -1,6 +1,16 @@
 const db = require('../config/db');
 
 function schedule(req, res) {
+  db.query(
+    `UPDATE schedule
+    SET work_time = end_at - start_at
+    RETURNING *;`,
+    (dbErr, dbRes) => {
+      if (dbErr) {
+        console.log(dbErr);
+      }
+    },
+  );
 
   db.query(
     `SELECT first_name, day,

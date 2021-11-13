@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
-const cookieParser = require('cookie-parser');
 const insert = require('../handlers/insert')
 const bcrypt = require('bcrypt');
-
-const authTokens = {};
 
 router
   .route('/')

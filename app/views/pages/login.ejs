@@ -6,36 +6,39 @@
 <body class="container">
 
 <header>
-  <%- include('../partials/header'); %>
+  <nav class="topnav">
+    <a href="/"><img class="nav-logo" src="/images/full_logo_white.png" alt="mr.coffee white logo"></a>
+    <ul>
+        <li><a href="http://localhost:3000/new/user">Sign Up</a></li>
+    </ul>
+</nav>
 </header>
 
-<main>
-  <div class="flex-container">
-    <div class="box-login">
-      <h2>Login to schedule</h2>
-      <form action="" method="post">
-          <div>
-              <label for="email">Email</label>
-              <div for="email"></div>
-          </div>
-          <input id="email" name="email"><br>
-          <div>
-              <label for="password">Password</label>
-              <div for="password"></div>
-              <input type="text" id="password" name="password"><br>
-          </div>
-          <div>
-            <a href="#"><p>Forget Password?</p></a>
-          </div>
-        <input type="submit" class="btn btn-submit" id="submit-btn" value="Sign In"></input>
-        <p>Don't have an account? <a href="http://localhost:3000/new/user">Sign Up!</a></p>
-      </form>
-      </div>
-      <figure>
-        <img src="/images/burgundy-54.png" class="login-img flex-login" alt="barista">
-      </figure>
-  </div>
-</main>
+<main class="flex-container">
+  <section class="box-login">
+    <h2>Login to schedule</h2>
+    <form action="" method="post">
+        <div>
+            <label for="email">Email</label>
+            <div for="email"></div>
+        </div>
+        <input id="email" name="email"><br>
+        <div>
+            <label for="password">Password</label>
+            <div for="password"></div>
+            <input type="text" id="password" name="password"><br>
+        </div>
+        <div>
+          <a href="#"><p>Forget Password?</p></a>
+        </div>
+      <input type="submit" class="btn btn-submit" id="submit-btn" value="Sign In"></input>
+      <p>Don't have an account? <a href="http://localhost:3000/new/user">Sign Up!</a></p>
+    </form>
+    </section>
+    <figure>
+      <img src="/images/burgundy-54.png" class="login-img flex-login" alt="barista">
+    </figure>
+  </main>
 
 <footer>
   <%- include('../partials/footer'); %>

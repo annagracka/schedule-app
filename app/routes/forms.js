@@ -46,7 +46,7 @@ router
 
 router
   .route('/schedule')
-  .post((req, res) => {
+  .post((req, res, next) => {
     const newDate = {
       email: req.body.email,
       day: req.body.day,
@@ -73,19 +73,21 @@ router
           console.log(dbErr);
         }
       },
+      // next()
     );
 
-    db.query(
-      `UPDATE schedule
-      SET work_time = end_at - start_at
-      RETURNING *;`,
-      (dbErr, dbRes) => {
-        if (dbErr) {
-          console.log(dbErr);
-        }
-      },
-    );
-    res.status(200).redirect('schedule');
+    // nie chce mi od razu updateowac
+    // db.query(
+    //   `UPDATE schedule
+    //   SET work_time = end_at - start_at
+    //   RETURNING *;`,
+    //   (dbErr, dbRes) => {
+    //     if (dbErr) {
+    //       console.log(dbErr);
+    //     }
+    //   },
+    // );
+    res.status(200).redirect('/home'); // jest redirect, ale bez nowej pozycji
   });
 
 module.exports = router;

@@ -9,39 +9,38 @@
   <%- include('../partials/header'); %>
 </header>
 
-<main>
-  <div class="box-form">
-    <div class="">
-      <h2 class="page-title">New schedule</h2>
-    </div>
-    <form action="" method="post">
-      <div class="label-box">
-          <label for="email">Email</label>
-          <div for="email"></div>
-      </div>
-      <input type="text" id="email" name="email" maxlength="30" required><br>
-      <div class="label-box">
-          <label for="day">Day</label>
-          <div for="day"></div>
-      </div>
-      <input type="text" id="day" name="day" maxlength="30" required><br>
-      <div class="label-box">
-          <label for="start_at">Start_at</label>
-          <div for="start_at"></div>
-      </div>
-      <input type="start_at" id="start_at" name="start_at" required><br>
-      <div class="label-box">
-          <label for="end_at">End_at</label>
-          <div for="end_at"></div>
-          <input type="text" id="end_at" name="end_at" required><br>
-      </div>
-      <div class="form-btn">
-          <input type="submit" class="btn btn-submit" value="Submit"></input>
-      </div>
-  </form>
-  <section class="back-to-main">
-    <a href="http://localhost:3000" id="back-link">Back to main page</a>
+<main class="box-form">
+  <section>
+    <h2 class="page-title">New schedule</h2>
   </section>
+  <form action="" method="post">
+    <div class="label-box">
+        <label for="email">Email</label>
+        <div for="email"></div>
+    </div>
+    <input type="text" id="email" name="email" maxlength="30" required><br>
+    <div class="label-box">
+        <label for="day">Day</label>
+        <div for="day"></div>
+    </div>
+    <input type="text" id="day" name="day" maxlength="30" required><br>
+    <div class="label-box">
+        <label for="start_at">Start_at</label>
+        <div for="start_at"></div>
+    </div>
+    <input type="start_at" id="start_at" name="start_at" required><br>
+    <div class="label-box">
+        <label for="end_at">End_at</label>
+        <div for="end_at"></div>
+        <input type="text" id="end_at" name="end_at" required><br>
+    </div>
+    <div class="form-btn">
+        <input type="submit" class="btn btn-submit" value="Submit"></input>
+    </div>
+</form>
+<section class="back-to-main">
+  <a href="http://localhost:3000" id="back-link">Back to main page</a>
+</section>
 </main>
 
 <footer>

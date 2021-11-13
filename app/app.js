@@ -40,6 +40,14 @@ app.use(express.static('public'));
 
 // app.use('/', login);
 
+app.get('/', checkAuthenticated, (req, res) => {res.render('login')});
+app.post('/', passport.authenticate('local', {
+        successRedirect: '/home', 
+        failureRedirect: '/',
+        // failureFlash (info o bledach, mozesz wrzucic gdzieniegdzie )
+})
+);
+
 app.use('/new', checkNotAuthenticated, insert);
 app.use('/edit',checkNotAuthenticated, edit);
 app.use('/delete', checkNotAuthenticated, deleteData);
@@ -49,15 +57,6 @@ app.get('/users', checkNotAuthenticated, display.users);
 app.get('/users/:id', checkNotAuthenticated, display.userDetails);
 app.get('/new/user', checkAuthenticated, display.userForm);
 app.get('/new/schedule', checkNotAuthenticated, display.scheduleForm);
-
-
-app.get('/', (req, res) => {res.render('login')});
-app.post('/', passport.authenticate('local', {
-        successRedirect: '/home', 
-        failureRedirect: '/',
-        // failureFlash (info o bledach, mozesz wrzucic gdzieniegdzie )
-})
-);
 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -71,17 +70,13 @@ function checkNotAuthenticated(req, res, next) {
         return next()
     }
     res.redirect('/')
-}
+};
 
-app.get('/testowe', (req, res) => {
-    res.render('testowe')
-})
 
-app.get('/testowe/logout', (req, res) => {
-    req.logOut();
-    // req.flash('success_msg', 'wylogowales sie)
+app.get('/logout', (req, res) => { req.logOut();
+    // req.flash('success_msg', 'wylogowales sie')
     res.redirect('/')
-})
+});
 
 
 module.exports = app;

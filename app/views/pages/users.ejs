@@ -9,37 +9,33 @@
   <%- include('../partials/header'); %>
 </header>
 
-<main>
-  <div class="container-table">
-    <h2>Users</h2>
-    <table class="table-center">
-      <thead>
-        <tr>
-          <th scope="col">First name</th>
-          <th scope="col">Last name</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% users.forEach(function(user) { %>
-        <tr>
-          <td><a href="http://localhost:3000/users/<%- user.id %>"><b><%- user.first_name %></b></a></td>
-          <td><%- user.last_name %></td>
-          <td>
-            <form action="/delete/user/<%=user.id%>" class="delete-button" method="post">
-              <input type="submit" class="btn" id="btn-delete" value="Delete"></input>
-        </form>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-    <section class="back-to-main">
-      <a href="http://localhost:3000/new/user"><button type="button" class="btn btn-submit">Add user</button></a>
-      <a href="http://localhost:3000/new/schedule"><button type="button" class="btn btn-submit">Add date</button></a>
-      <br>
-      <a href="http://localhost:3000" id="back-link">Back to main page</a>
-    </section>
+<main class="container-table">
+  <h2>Users</h2>
+  <table class="table-center">
+    <thead>
+      <tr>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <!-- <th scope="col"></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(user) { %>
+      <tr>
+        <td><a href="http://localhost:3000/users/<%- user.id %>"><b><%- user.first_name %></b></a></td>
+        <td><%- user.last_name %></td>
+        <!-- <td>
+          <form action="/delete/user/<%=user.id%>" class="delete-button" method="post">
+            <input type="submit" class="btn" id="btn-delete" value="Delete"></input>
+      </form>
+        </td> -->
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <section class="back-to-main">
+    <a href="http://localhost:3000" id="back-link">Back to main page</a>
+  </section>
 </main>
 
 <footer>

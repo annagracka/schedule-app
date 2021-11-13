@@ -22,12 +22,12 @@ router
     const { id } = req.params;
     db.query('DELETE FROM schedule WHERE id = $1', [id], (dbErr, dbRes) => {
       try {
-        res.redirect('/users');
+        res.redirect('/home');
       } catch (e) {
         console.log(e);
       }
     });
-    res.redirect('/users');
+    res.redirect('/home');
     // redirect do user-details okreslonego uzytkownika
   });
 
