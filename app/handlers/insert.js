@@ -9,7 +9,7 @@ function passwordEncrypt(userData) {
 function randomString() {
   const randomChars = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   return randomChars;
-};
+}
 
 module.exports = {
   passwordEncrypt,

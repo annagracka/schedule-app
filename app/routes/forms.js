@@ -19,7 +19,7 @@ router
       return res.status(418).send('Invalid data');
     }
     if (verify.isEmailInDatabase(newUser)) {
-      console.log('email zajety')
+      console.log('email zajety');
       return res.render('error', { error: 'Invalid data' });
     }
 
@@ -34,7 +34,7 @@ router
           if (dbRes.rows === undefined) {
             res.render('error', { error: 'Invalid data' });
           } else {
-            res.redirect('user');
+            res.redirect('/');
           }
         } catch (e) {
           console.log(e);
@@ -54,12 +54,12 @@ router
       end_at: req.body.end_at,
     };
 
-    console.log(newDate['email'])
-    console.log(verify.isEmailInDatabase(newDate))
+    console.log(newDate.email);
+    console.log(verify.isEmailInDatabase(newDate));
 
     // if (verify.isEmailInDatabase(newDate)) {
-      // return res.render('error', { error: 'Email not found' });
-      // console.log('jest @')
+    // return res.render('error', { error: 'Email not found' });
+    // console.log('jest @')
     // }
 
     // verify.isDateAvailable(newDate);

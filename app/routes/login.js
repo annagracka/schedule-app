@@ -26,7 +26,7 @@ router
         db.query(`UPDATE users SET auth_token = $1 WHERE id = ${userId}`, [authToken], (dbErr, dbRes) => {
           try {
             res.cookie('AuthToken', authToken)
-            res.redirect('/home')
+            return res.redirect('home') // blad chyba jest ru
           }
           catch(e) {
             console.log('blad')

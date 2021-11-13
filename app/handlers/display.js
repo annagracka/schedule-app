@@ -1,6 +1,7 @@
 const db = require('../config/db');
 
 function schedule(req, res) {
+
   db.query(
     `SELECT first_name, day,
     to_char(start_at, 'HH24:MI') AS start_at,

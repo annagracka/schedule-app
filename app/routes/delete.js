@@ -23,9 +23,8 @@ router
     db.query('DELETE FROM schedule WHERE id = $1', [id], (dbErr, dbRes) => {
       try {
         res.redirect('/users');
-      }
-      catch(e) {
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
     });
     res.redirect('/users');
