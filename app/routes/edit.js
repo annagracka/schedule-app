@@ -1,8 +1,8 @@
-const { Router } = require('express');
+const db = require('../config/db');
 const express = require('express');
 
 const router = express.Router();
-const db = require('../config/db');
+const { Router } = require('express');
 
 router
   .route('/schedule/:id')

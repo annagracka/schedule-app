@@ -1,13 +1,15 @@
 const db = require('../config/db');
 
-function schedule(req, res) {
+function renderSchedule(req, res) {
   db.query(
     `UPDATE schedule
     SET work_time = end_at - start_at
     RETURNING *;`,
     (dbErr, dbRes) => {
-      if (dbErr) {
-        console.log(dbErr);
+      try {
+        res.status(200);
+      } catch {
+        res.status(400).send(dbErr);
       }
     },
   );
@@ -21,25 +23,29 @@ function schedule(req, res) {
     user_id FROM schedule
     JOIN users ON users.id = schedule.user_id`,
     (dbErr, dbRes) => {
-      if (dbErr) {
-        return dbErr;
-      } res.render('index', { schedule: dbRes.rows });
+      try {
+        res.render('index', { schedule: dbRes.rows });
+      } catch {
+        res.status(400).send(dbErr);
+      }
     },
   );
 }
 
-function users(req, res) {
+function renderUsers(req, res) {
   db.query(
     'SELECT first_name, last_name, id FROM users',
     (dbErr, dbRes) => {
-      if (dbErr) {
-        return console.log(dbErr);
-      } res.render('users', { users: dbRes.rows });
+      try {
+        res.render('users', { users: dbRes.rows })
+      } catch {
+        res.status(400).send(dbErr);
+      };
     },
   );
 }
 
-function userDetails(req, res) {
+function renderUserDetails(req, res) {
   const { id } = req.params;
   db.query(
     `SELECT first_name, day,
@@ -56,25 +62,25 @@ function userDetails(req, res) {
         } else {
           res.render('user-details', { userDetails: dbRes.rows });
         }
-      } catch (e) {
-        console.log(e);
+      } catch {
+        res.status(400).send('Something went wrong');
       }
     },
   );
 }
 
-function userForm(req, res) {
+function renderUserForm(req, res) {
   res.render('new-user');
 }
 
-function scheduleForm(req, res) {
+function renderScheduleForm(req, res) {
   res.render('new-schedule');
 }
 
 module.exports = {
-  schedule,
-  users,
-  userDetails,
-  userForm,
-  scheduleForm,
+  renderSchedule,
+  renderUsers,
+  renderUserDetails,
+  renderUserForm,
+  renderScheduleForm,
 };

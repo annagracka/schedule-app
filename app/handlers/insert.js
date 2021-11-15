@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const db = require('../config/db');
 
 function passwordEncrypt(userData) {
   const salt = bcrypt.genSaltSync(10);

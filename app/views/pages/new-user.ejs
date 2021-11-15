@@ -6,7 +6,12 @@
 <body class="container">
 
 <header>
-  <%- include('../partials/header'); %>
+  <nav class="topnav">
+    <a href="/"><img class="nav-logo" src="/images/full_logo_white.png" alt="mr.coffee white logo"></a>
+    <ul>
+        <li><a href="http://localhost:3000">Back to main page</a></li>
+    </ul>
+</nav>
 </header>
 
 <main class="box-form">
@@ -34,7 +39,7 @@
           <input type="text" id="password" name="password" required><br>
       </div>
       <div class="form-btn">
-          <input type="submit" id="new-event=btn" class="btn btn-submit" value="submit"></input>
+          <input type="submit" id="new-event=btn" class="btn btn-submit" value="Submit"></input>
       </div>
   </form>
   <section class="back-to-main">
