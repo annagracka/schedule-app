@@ -7,40 +7,29 @@ const verify = require('../handlers/verify');
 
 router
   .route('/user')
-  .post((req, res) => {
+  .post(async (req, res, next) => {
     const newData = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     };
+    try {
+      await verify.isFieldEmpty(newData, res);
 
-    verify.isFieldEmpty(newData, res);
+      verify.isEmailInDatabase(newData, res);
 
-    if (verify.isEmailInDatabase(newData, res)) {
-      res.render('error', { error: 'The email address already in use' });
-      
-    } else {return true}
+      insert.verifiedUser(newData, res);
 
-    const hash = insert.passwordEncrypt(newData.password);
-    const verifiedData = [newData.first_name, newData.last_name, newData.email, hash];
-
-    db.query(
-      'INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)',
-      verifiedData,
-      (dbErr, dbRes) => {
-        try {
-          return res.redirect('/');
-        } catch {
-          return res.render('error', { error: 'Invalid data, dodac tego nie moglam' });
-        }
-      },
-    );
+    } catch (error) {
+      return next(error)
+    };
+    
   });
 
 router
   .route('/schedule')
-  .post((req, res) => {
+  .post(async (req, res, next) => {
     const newDate = {
       email: req.body.email,
       day: req.body.day,
@@ -48,10 +37,16 @@ router
       end_at: req.body.end_at,
     };
 
-    // jeblo w obu weryfikacjach, jutro jak bedzie sila
-    if (verify.isEmailInDatabase(newDate, res) === false) {
-      return res.render('error', { error: 'Email not found' });
+    try {
+      await verify.isEmailNotInDatabase(newDate, res)
+      isDateAvailable(newDate, res);
+      verifiedDate(newDate, res)
     }
+    catch (error) {
+      return next(error);
+    }
+    
+    // verify.isEmailNotInDatabase(newDate, res);
 
     function isDateAvailable(date, response) {
       const q = `SELECT day, start_at, end_at FROM schedule WHERE schedule.user_id=(SELECT id FROM users WHERE email='${newDate.email}')`;
@@ -65,30 +60,30 @@ router
 
             if (firstApprovedVer && secApprovedVer) {
               return response.redirect('home');
+            } else {
+              return response.status(400).render('error', { error: 'Incorrect date' });
             }
-            console.log('error w datach');
-            return response.render('new-schedule');
           }
           //
         }
       });
     }
 
-    // ni edialaaaaaa
-    isDateAvailable(newDate, res);
-
-    const addDate = `INSERT INTO schedule (user_id, day, start_at, end_at)
+    function verifiedDate(newDate, res) {
+      const addDate = `INSERT INTO schedule (user_id, day, start_at, end_at)
     VALUES ((SELECT id FROM users WHERE email='${newDate.email}'), '${newDate.day}', '${newDate.start_at}', '${newDate.end_at}');`;
     db.query(
       addDate,
       (dbErr, dbRes) => {
         try {
-          res.status(200).redirect('/');
+          return res.status(200).redirect('/');
         } catch {
-          res.status(400).send('Something went wrong');
+          return res.status(400).render('error', { error: 'Something went wrong' });
         }
       },
     );
+    }
+    
   });
 
 module.exports = router;

@@ -12,7 +12,25 @@ function randomString() {
   return randomChars;
 }
 
+function verifiedUser(newData, res) {
+  const hash = passwordEncrypt(newData.password);
+  const verifiedData = [newData.first_name, newData.last_name, newData.email, hash];
+
+  db.query(
+    'INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)',
+    verifiedData,
+    (dbErr, dbRes) => {
+      try {
+        return res.redirect('/');
+      } catch {
+        return res.status(400).render('error', { error: 'Something went wrong' });
+      }
+    },
+  );
+}
+
 module.exports = {
   passwordEncrypt,
   randomString,
+  verifiedUser
 };

@@ -18,13 +18,13 @@ router
 
 router
   .route('/schedule/:id')
-  .post((req, res) => {
+  .post((req, res, next) => {
     const { id } = req.params;
     db.query('DELETE FROM schedule WHERE id = $1', [id], (dbErr, dbRes) => {
       try {
         res.redirect('/home');
-      } catch {
-        return res.send('Something went wrong');
+      } catch (error){
+        return next(error)
       }
     });
     res.redirect('/home');
