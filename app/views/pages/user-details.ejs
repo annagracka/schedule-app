@@ -10,7 +10,7 @@
 </header>
 
 <main class="container-table">
-  <h2><%= userDetails[0]["first_name"] %>' schedule</h2>
+  <h2><%= userDetails[0]["first_name"] %> <%= userDetails[0]["last_name"] %><br><%= userDetails[0]["email"] %></h2>
   <table class="table-center">
     <thead>
       <tr>
@@ -18,7 +18,7 @@
         <th scope="col">Start at</th>
         <th scope="col">End at</th>
         <th scope="col">Work time</th>
-        <th></th>
+        <!-- <th></th> -->
       </tr>
     </thead>
     <tbody>
@@ -28,10 +28,10 @@
         <td><%- event.start_at %></td>
         <td><%- event.end_at %></td>
         <td><%- event.hour %>h <%- event.minute %>min</td>
-        <td>
-          <form action="/delete/schedule/<%= event.id %>" class="delete-button" method="post">
+        <!-- <td> -->
+          <!-- <form action="/delete/schedule/<%= event.id %>" class="delete-button" method="post">
             <input type="submit" class="btn" id="btn-delete" value="Delete"></input>
-      </form>
+      </form> -->
       <!-- <a href="http://localhost:3000/edit/schedule/<%= event.id %>"><button type="button" class="btn btn-submit">Edit</button></a> -->
       </tr>
       <% }); %>

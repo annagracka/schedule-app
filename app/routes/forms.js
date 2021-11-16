@@ -31,22 +31,17 @@ router
   .route('/schedule')
   .post(async (req, res, next) => {
     const newDate = {
-      email: req.body.email,
       day: req.body.day,
       start_at: req.body.start_at,
       end_at: req.body.end_at,
     };
 
     try {
-      await verify.isEmailNotInDatabase(newDate, res)
-      isDateAvailable(newDate, res);
-      verifiedDate(newDate, res)
-    }
-    catch (error) {
-      return next(error);
-    }
-    
-    // verify.isEmailNotInDatabase(newDate, res);
+      await isDateAvailable(newDate, res);
+      await verifiedDate(newDate, res);
+    } catch(e) {
+    return next(error);
+  };
 
     function isDateAvailable(date, response) {
       const q = `SELECT day, start_at, end_at FROM schedule WHERE schedule.user_id=(SELECT id FROM users WHERE email='${newDate.email}')`;
@@ -71,7 +66,7 @@ router
 
     function verifiedDate(newDate, res) {
       const addDate = `INSERT INTO schedule (user_id, day, start_at, end_at)
-    VALUES ((SELECT id FROM users WHERE email='${newDate.email}'), '${newDate.day}', '${newDate.start_at}', '${newDate.end_at}');`;
+    VALUES ((SELECT id FROM users WHERE email='${req.user.email}'), '${newDate.day}', '${newDate.start_at}', '${newDate.end_at}');`;
     db.query(
       addDate,
       (dbErr, dbRes) => {

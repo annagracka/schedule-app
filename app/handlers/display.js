@@ -60,9 +60,15 @@ function renderUserDetails(req, res) {
         if (dbRes.rows[0] === undefined) {
           res.render('error', { error: 'User has no schedule' });
         } else {
-          res.render('user-details', { userDetails: dbRes.rows });
+          if (id != req.user.id) {
+            res.render('user-details', { userDetails : dbRes.rows })
+          } else {
+            res.render('logged-user-details', { userDetails : dbRes.rows })
+          }
+
         }
-      } catch {
+      } 
+      catch {
         res.status(400).send('Something went wrong');
       }
     },
