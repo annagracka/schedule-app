@@ -8,10 +8,18 @@
     "extends": [
         "airbnb-base"
     ],
+    "overrides": [
+        {
+            "files": ["config/*.js"],
+            "rules": {
+                "require-jsdoc": "off"
+        }
+    }
+    ],
     "parserOptions": {
         "ecmaVersion": 13
     },
     "rules": {
-
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
     }
 }

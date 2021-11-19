@@ -15,16 +15,20 @@ router
       password: req.body.password,
     };
     try {
-      await verify.isFieldEmpty(newData, res);
+      const emptyField = verify.isFieldEmpty(newData, res);
+      if (emptyField) {
+        return res.render('error', { error: 'The email address already in use' });
+      }
 
-      verify.isEmailInDatabase(newData, res);
+      const isEmail = await verify.isEmailInDatabase(newData, res);
+      if (isEmail) {
+        return res.render('error', { error: 'The email address already in use' });
+      }
 
       insert.verifiedUser(newData, res);
-
     } catch (error) {
-      return next(error)
-    };
-    
+      return next(error);
+    }
   });
 
 router
@@ -36,49 +40,54 @@ router
       end_at: req.body.end_at,
     };
 
-    try {
-      await isDateAvailable(newDate, res);
-      await verifiedDate(newDate, res);
-    } catch(e) {
-    return next(error);
-  };
+    async function isDateAvailable(date) {
+      if (!date.start_at < date.end_at) {
+        return false;
+      }
+      return db.query(`SELECT day, to_char(start_at, 'HH24:MI') AS start_at, to_char(end_at, 'HH24:MI') AS end_at FROM schedule WHERE schedule.user_id=(SELECT id FROM users WHERE email='${req.user.email}')`)
+        .then((dbRes) => {
+          const oldDate = dbRes.rows;
 
-    function isDateAvailable(date, response) {
-      const q = `SELECT day, start_at, end_at FROM schedule WHERE schedule.user_id=(SELECT id FROM users WHERE email='${newDate.email}')`;
-      db.query(q, (dbErr, dbRes) => {
-        const oldDate = dbRes.rows;
-
-        for (let i = 0; i < oldDate.length; i += 1) {
-          if (oldDate[i].day === newDate.day) {
-            const firstApprovedVer = ((date.start_at < date.end_at) && (date.end_at <= oldDate.start_at) && (oldDate.start_at < oldDate.end_at));
-            const secApprovedVer = ((oldDate.start_at < oldDate.end_at) && (oldDate.end_at < date.start_at) && (date.start_at < date.end_at));
-
-            if (firstApprovedVer && secApprovedVer) {
-              return response.redirect('home');
-            } else {
-              return response.status(400).render('error', { error: 'Incorrect date' });
+          for (let i = 0; i < oldDate.length; i += 1) {
+            if (oldDate[i].day === date.day) {
+              const earlierDate = (date.end_at <= oldDate[i].start_at);
+              const laterDate = ((oldDate[i].end_at <= date.start_at));
+              if (!earlierDate && !laterDate) {
+                return false;
+              }
             }
-          }
-          //
-        }
-      });
+          } return true;
+        })
+        .catch((dbErr) => console.log(dbErr));
     }
 
-    function verifiedDate(newDate, res) {
+    function verifiedDate(newDate, response) {
       const addDate = `INSERT INTO schedule (user_id, day, start_at, end_at)
     VALUES ((SELECT id FROM users WHERE email='${req.user.email}'), '${newDate.day}', '${newDate.start_at}', '${newDate.end_at}');`;
-    db.query(
-      addDate,
-      (dbErr, dbRes) => {
-        try {
-          return res.status(200).redirect('/');
-        } catch {
-          return res.status(400).render('error', { error: 'Something went wrong' });
-        }
-      },
-    );
+      db.query(
+        addDate,
+        () => {
+          try {
+            response.status(200).redirect('/');
+            return;
+          } catch {
+            response.status(400).render('error', { error: 'Something went wrong' });
+          }
+        },
+      );
     }
-    
+
+    try {
+      const checkSchedule = await isDateAvailable(newDate, res);
+      if (!checkSchedule) {
+        res.render('error', { error: 'Invalid dates' });
+        return;
+      }
+
+      verifiedDate(newDate, res);
+    } catch (error) {
+      return next(error);
+    }
   });
 
 module.exports = router;

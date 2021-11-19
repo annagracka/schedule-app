@@ -19,7 +19,7 @@ function verifiedUser(newData, res) {
   db.query(
     'INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)',
     verifiedData,
-    (dbErr, dbRes) => {
+    () => {
       try {
         return res.redirect('/');
       } catch {
@@ -32,5 +32,5 @@ function verifiedUser(newData, res) {
 module.exports = {
   passwordEncrypt,
   randomString,
-  verifiedUser
+  verifiedUser,
 };

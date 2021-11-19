@@ -5,7 +5,7 @@ function renderSchedule(req, res) {
     `UPDATE schedule
     SET work_time = end_at - start_at
     RETURNING *;`,
-    (dbErr, dbRes) => {
+    (dbErr, _dbRes) => {
       try {
         res.status(200);
       } catch {
@@ -32,15 +32,15 @@ function renderSchedule(req, res) {
   );
 }
 
-function renderUsers(req, res) {
+function renderUsers(_req, res, next) {
   db.query(
     'SELECT first_name, last_name, id FROM users',
-    (dbErr, dbRes) => {
+    (_dbErr, dbRes) => {
       try {
-        res.render('users', { users: dbRes.rows })
-      } catch {
-        res.status(400).send(dbErr);
-      };
+        res.render('users', { users: dbRes.rows });
+      } catch (error) {
+        return next(error);
+      }
     },
   );
 }
@@ -55,20 +55,16 @@ function renderUserDetails(req, res) {
     extract(MINUTE FROM work_time) AS minute,
     work_time, user_id, schedule.id FROM users, schedule WHERE users.id=$1 AND schedule.user_id=$1`,
     [id],
-    (dbErr, dbRes) => {
+    (_dbErr, dbRes) => {
       try {
         if (dbRes.rows[0] === undefined) {
           res.render('error', { error: 'User has no schedule' });
+        } else if (id !== req.user.id) {
+          res.render('user-details', { userDetails: dbRes.rows });
         } else {
-          if (id != req.user.id) {
-            res.render('user-details', { userDetails : dbRes.rows })
-          } else {
-            res.render('logged-user-details', { userDetails : dbRes.rows })
-          }
-
+          res.render('logged-user-details', { userDetails: dbRes.rows });
         }
-      } 
-      catch {
+      } catch {
         res.status(400).send('Something went wrong');
       }
     },

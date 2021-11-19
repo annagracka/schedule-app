@@ -1,14 +1,15 @@
-const db = require('../config/db');
 const express = require('express');
+const db = require('../config/db');
 
 const router = express.Router();
-const { Router } = require('express');
 
 router
   .route('/schedule/:id')
   .get((req, res) => {
     const { id } = req.params;
-    db.query('SELECT * FROM schedule WHERE id = $1'), [id], (dbErr, dbRes) => {
+    db.query('SELECT * FROM schedule WHERE id = $1'),
+    [id],
+    (dbErr, _dbRes) => {
       try {
         res.render('edit-schedule');
       } catch (e) {
