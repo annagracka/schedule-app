@@ -24,8 +24,9 @@ function verifiedUser(newData, res) {
       try {
         logger.log('info', 'New account has been created');
         return res.redirect('/');
-      } catch {
-        return res.status(400).render('error', { error: 'Something went wrong' });
+      } catch (error) {
+        logger.log('error', `${error}`);
+        res.status(400).render('error', { error: 'Something went wrong' });
       }
     },
   );

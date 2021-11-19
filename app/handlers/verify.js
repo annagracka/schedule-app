@@ -13,7 +13,7 @@ async function isEmailInDatabase(user) {
     [user.email],
   )
     .then((dbRes) => (dbRes.rows.length > 0))
-    .catch((dbErr) => console.log(dbErr));
+    .catch((dbErr) => logger.log('error', `${dbErr}`));
 }
 
 function ifAuthenticated(req, res, next) {

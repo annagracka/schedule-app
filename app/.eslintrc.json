@@ -8,13 +8,8 @@
     "extends": [
         "airbnb-base"
     ],
-    "overrides": [
-        {
-            "files": ["config/*.js"],
-            "rules": {
-                "require-jsdoc": "off"
-        }
-    }
+    "ignorePatterns": [
+        "server.js", "**/config/*.js"
     ],
     "parserOptions": {
         "ecmaVersion": 13

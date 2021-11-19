@@ -4,6 +4,7 @@ const insert = require('../handlers/insert');
 
 const router = express.Router();
 const verify = require('../handlers/verify');
+const logger = require('../config/logger');
 
 router
   .route('/user')
@@ -27,13 +28,14 @@ router
 
       insert.verifiedUser(newData, res);
     } catch (error) {
-      return next(error);
+      logger.log('error', `${error}`);
+      res.status(400).render('error', { error: 'Something went wrong' });
     }
   });
 
 router
   .route('/schedule')
-  .post(async (req, res, next) => {
+  .post(async (req, res) => {
     const newDate = {
       day: req.body.day,
       start_at: req.body.start_at,
@@ -58,7 +60,7 @@ router
             }
           } return true;
         })
-        .catch((dbErr) => console.log(dbErr));
+        .catch((dbErr) => logger.log('error', `${dbErr}`));
     }
 
     function verifiedDate(newDate, response) {
@@ -70,8 +72,9 @@ router
           try {
             response.status(200).redirect('/');
             return;
-          } catch {
-            response.status(400).render('error', { error: 'Something went wrong' });
+          } catch (error) {
+            logger.log('error', `${error}`);
+            res.status(400).render('error', { error: 'Something went wrong' });
           }
         },
       );
@@ -86,7 +89,8 @@ router
 
       verifiedDate(newDate, res);
     } catch (error) {
-      return next(error);
+      logger.log('error', `${error}`);
+      res.status(400).render('error', { error: 'Something went wrong' });
     }
   });
 

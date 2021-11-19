@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./db');
+const logger = require('./logger');
 
 function initialize(passport, res) {
   const authenticateUser = (email, password, done) => {
@@ -19,6 +20,7 @@ function initialize(passport, res) {
               return next(passErr);
             }
             if (isValid) {
+              logger.log('info', 'User logged');
               return done(null, user);
             }
             // info, np. flash

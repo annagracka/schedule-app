@@ -5,7 +5,6 @@ const path = require('path');
 const session = require('express-session');
 const deleteData = require('./routes/delete');
 const display = require('./handlers/display');
-const edit = require('./routes/edit');
 const initializePassport = require('./config/passport');
 const insert = require('./routes/forms');
 const verify = require('./handlers/verify');
@@ -43,7 +42,6 @@ app.post('/', passport.authenticate('local', {
 }));
 
 app.use('/new', insert);
-app.use('/edit', verify.ifNotAuthenticated, edit);
 app.use('/delete', verify.ifNotAuthenticated, deleteData);
 
 app.get('/home', verify.ifNotAuthenticated, display.renderSchedule);

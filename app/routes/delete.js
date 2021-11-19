@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../config/db');
 
 const router = express.Router();
+const logger = require('../config/logger');
 
 router
   .route('/user/:id')
@@ -13,8 +14,9 @@ router
       () => {
         try {
           res.redirect('/users');
-        } catch {
-          return res.send('Something went wrong');
+        } catch (error) {
+          logger.log('error', `${error}`);
+          res.status(400).render('error', { error: 'Something went wrong' });
         }
       },
     );
@@ -22,7 +24,7 @@ router
 
 router
   .route('/schedule/:id')
-  .post((req, res, next) => {
+  .post((req, res) => {
     const { id } = req.params;
     db.query(
       'DELETE FROM schedule WHERE id = $1',
@@ -31,7 +33,8 @@ router
         try {
           res.redirect('/home');
         } catch (error) {
-          return next(error);
+          logger.log('error', `${error}`);
+          res.status(400).render('error', { error: 'Something went wrong' });
         }
       },
     );

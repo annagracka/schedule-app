@@ -1,15 +1,17 @@
 const db = require('../config/db');
+const logger = require('../config/logger');
 
 function renderSchedule(_req, res) {
   db.query(
     `UPDATE schedule
     SET work_time = end_at - start_at
     RETURNING *;`,
-    (dbErr, _dbRes) => {
+    () => {
       try {
         res.status(200);
-      } catch {
-        res.status(400).send(dbErr);
+      } catch (error) {
+        logger.log('error', `${error}`);
+        res.status(400).send.render('error', { error: 'Something went wrong' });
       }
     },
   );
@@ -22,24 +24,26 @@ function renderSchedule(_req, res) {
     extract(MINUTE FROM work_time) AS minute,
     user_id FROM schedule
     JOIN users ON users.id = schedule.user_id`,
-    (dbErr, dbRes) => {
+    (_dbErr, dbRes) => {
       try {
         res.render('index', { schedule: dbRes.rows });
-      } catch {
-        res.status(400).send(dbErr);
+      } catch (error) {
+        logger.log('error', `${error}`);
+        res.status(400).send.render('error', { error: 'Something went wrong' });
       }
     },
   );
 }
 
-function renderUsers(_req, res, next) {
+function renderUsers(_req, res) {
   db.query(
     'SELECT first_name, last_name, id FROM users',
     (_dbErr, dbRes) => {
       try {
         res.render('users', { users: dbRes.rows });
       } catch (error) {
-        return next(error);
+        logger.log('error', `${error}`);
+        res.status(400).send.render('error', { error: 'Something went wrong' });
       }
     },
   );
@@ -64,18 +68,19 @@ function renderUserDetails(req, res) {
         } else {
           res.render('logged-user-details', { userDetails: dbRes.rows });
         }
-      } catch {
-        res.status(400).send('Something went wrong');
+      } catch (error) {
+        logger.log('error', `${error}`);
+        res.status(400).send.render('error', { error: 'Something went wrong' });
       }
     },
   );
 }
 
-function renderUserForm(req, res) {
+function renderUserForm(_req, res) {
   res.render('new-user');
 }
 
-function renderScheduleForm(req, res) {
+function renderScheduleForm(_req, res) {
   res.render('new-schedule');
 }
 
