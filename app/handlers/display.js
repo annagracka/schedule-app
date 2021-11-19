@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-function renderSchedule(req, res) {
+function renderSchedule(_req, res) {
   db.query(
     `UPDATE schedule
     SET work_time = end_at - start_at

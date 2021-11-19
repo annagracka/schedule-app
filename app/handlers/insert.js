@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
+const logger = require('../config/logger');
 
 function passwordEncrypt(userData) {
   const salt = bcrypt.genSaltSync(10);
@@ -21,6 +22,7 @@ function verifiedUser(newData, res) {
     verifiedData,
     () => {
       try {
+        logger.log('info', 'New account has been created');
         return res.redirect('/');
       } catch {
         return res.status(400).render('error', { error: 'Something went wrong' });

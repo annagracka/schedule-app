@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const logger = require('../config/logger');
 
 function isFieldEmpty(form) {
   for (const [_key, value] of Object.entries(form)) {
