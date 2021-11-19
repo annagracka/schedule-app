@@ -8,7 +8,7 @@ const logger = require('../config/logger');
 
 router
   .route('/user')
-  .post(async (req, res, next) => {
+  .post(async (req, res) => {
     const newData = {
       first_name: req.body.first_name,
       last_name: req.body.last_name,

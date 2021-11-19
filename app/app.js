@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env' });
 const express = require('express');
 const flash = require('express-flash');
 const passport = require('passport');
@@ -38,7 +39,6 @@ app.get('/', verify.ifAuthenticated, (req, res) => { res.render('login'); });
 app.post('/', passport.authenticate('local', {
   successRedirect: '/home',
   failureRedirect: '/',
-  // failureFlash (info o bledach, mozesz wrzucic gdzieniegdzie ) albo funcke z zad4
 }));
 
 app.use('/new', insert);
@@ -54,7 +54,6 @@ app.get('/new/schedule', verify.ifNotAuthenticated, display.renderScheduleForm);
 
 app.get('/logout', (req, res) => {
   req.logOut();
-  // req.flash('success_msg', 'wylogowales sie')  albo funcke z zad4
   res.redirect('/');
 });
 
