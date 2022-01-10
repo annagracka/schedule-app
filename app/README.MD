@@ -25,10 +25,10 @@ The user can:
 
 ## Tech
 To work properly schedule apps uses a few open source libraries and projects:
-- [Node.js]
-- [Express]
-- [ejs]
 
+- [Node.js](http://nodejs.org)
+- [Express](http://expressjs.com)
+- [ejs](https://ejs.co/)
 
 ## Installation
 Install the dependencies and devdependencies and start the server.
@@ -66,7 +66,7 @@ npm start
 
 ## FUTURE TASKS
 
-- [ ] Redesing and rewrite layout in [React]
+- [ ] Redesing and rewrite layout in [React](https://reactjs.org/)
 - [ ] Display schedule as a calendar
 - [ ] Hide characters during password entering
 - [ ] Create Modals with status info
@@ -74,14 +74,3 @@ npm start
 - [ ] Create remind password tool
 - [ ] Add 'Edit schedule' feature
 - [ ] Write more advanced validation
-
-
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. 
-
-
-   [express]: <http://expressjs.com>
-   [ejs]: <https://ejs.co/>
-   [node.js]: <http://nodejs.org>
-   [React]: <https://reactjs.org/>
-   
