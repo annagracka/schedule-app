@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "format": "prettier --write . *.{js,jsx}",
     "start": "nodemon ./src/server.js",
-    "lint:fix": "eslint . *.js  --fix",
-    "lint": "eslint . *.js"
+    "lint": "eslint . *.{js,jsx} --quiet"
   },
   "keywords": [],
   "author": "Anna Gaca",
@@ -21,17 +21,25 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "session": "^0.1.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
     "dotenv": "^10.0.0",
-    "eslint": "^8.2.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^8.1.0",
     "nodemon": "^2.0.15",
-    "pg-hstore": "^2.3.4"
+    "parcel": "^1.12.3",
+    "pg-hstore": "^2.3.4",
+    "prettier": "^2.5.1"
   },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pl-incode/exercise-5-mr-coffee---expressjs-db-annagaca.git"

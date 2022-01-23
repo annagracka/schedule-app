@@ -1,12 +1,12 @@
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const db = require('./db');
-const logger = require('./logger');
+const bcrypt = require("bcrypt");
+const LocalStrategy = require("passport-local").Strategy;
+const db = require("./db");
+const logger = require("./logger");
 
 function initialize(passport, res) {
   const authenticateUser = (email, password, done) => {
     db.query(
-      'SELECT * FROM users WHERE email = $1',
+      "SELECT * FROM users WHERE email = $1",
       [email],
       (dbErr, dbRes) => {
         if (dbErr) {
@@ -20,36 +20,36 @@ function initialize(passport, res) {
               return next(passErr);
             }
             if (isValid) {
-              logger.log('info', 'User logged');
+              logger.log("info", "User logged");
               return done(null, user);
             }
             // info, np. flash
-            console.log('password incorrect');
+            console.log("password incorrect");
             return done(null, false);
           });
         } else {
           // info, np. flash
-          console.log('nie ma takiego @');
+          console.log("nie ma takiego @");
           return done(null, false);
         }
-      },
+      }
     );
   };
 
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email',
-        passwordField: 'password',
+        usernameField: "email",
+        passwordField: "password",
       },
-      authenticateUser,
-    ),
+      authenticateUser
+    )
   );
 
   passport.serializeUser((user, done) => done(null, user.id));
 
   passport.deserializeUser((id, done) => {
-    db.query('SELECT * FROM users WHERE id = $1', [id], (dbErr, dbRes) => {
+    db.query("SELECT * FROM users WHERE id = $1", [id], (dbErr, dbRes) => {
       if (dbErr) {
         return done(dbErr);
       }

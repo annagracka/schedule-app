@@ -1,20 +1,20 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
-        "airbnb-base"
-    ],
-    "ignorePatterns": [
-        "server.js", "**/config/*.js"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 13
-    },
-    "rules": {
-        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  "extends": ["eslint:recommended", "prettier"],
+  "ignorePatterns": ["server.js", "**/config/*.js"],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
+  },
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
 }
