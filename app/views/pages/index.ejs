@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main class="container-table">
+  <article>
+    <h2>Schedule</h2>
+  </article>
+  <table class="table-center">
+    <thead>
+      <tr>
+        <th scope="col">First name</th>
+        <th scope="col">Day</th>
+        <th scope="col">Start at</th>
+        <th scope="col">End at</th>
+        <th scope="col">Work time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% schedule.forEach(function(event) { %>
+      <tr>
+        <td><a href="http://localhost:3000/users/<%- event.user_id %>"><b><%- event.first_name %></b></a></td>
+        <td><%- event.day %></td>
+        <td><%- event.start_at %></td>
+        <td><%- event.end_at %></td>
+        <td><%- event.hour %>h <%- event.minute %>min</td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <section class="back-to-main">
+    <a href="http://localhost:3000/new/schedule"><button type="button" class="btn btn-submit">Add date</button></a>
+    <br>
+  </section>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>
+</html>
